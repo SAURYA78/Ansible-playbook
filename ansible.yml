@@ -1,0 +1,12 @@
+- hosts: target1
+  become: true
+  tasks:
+    - name: Install software
+      apt: name=software-properties-common state=present update_cache=yes
+
+    - name: Add repo
+      apt_repository:
+           repo: 'ppa:ansible/ansible'
+
+    - name: Install ansible on server
+      apt: name=ansible state=present update_cache=yes 
