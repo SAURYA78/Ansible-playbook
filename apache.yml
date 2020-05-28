@@ -1,0 +1,14 @@
+- hosts: target1
+  become: true
+  tasks:
+    - name: install apache
+      apt: name=apache2 state=present update_cache=yes
+
+    - name: replace index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "Hi i ma host {{ ansible_hostname }} and i run linux kernel {{ ansible_kernel }}\n"
+      register: index_file
+
+    - name: output index file
+      debug: msg={{ index_file }}

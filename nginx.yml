@@ -1,0 +1,13 @@
+---
+- hosts: target1
+  become: true
+  serial: 1
+  tasks:
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest 
+      notify:	
+        - start nginx
+
+  handlers:
+    - name: restart apache2
+      service: name=nginx state=restarted

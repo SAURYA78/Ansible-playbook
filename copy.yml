@@ -1,0 +1,26 @@
+---
+- hosts: target1
+  tasks:
+    - name: copy file
+      copy:
+        src: /home/ubuntu/ansible/hosts
+        dest: /home/ubuntu
+        mode: u=rw,g=r,o=r
+
+    - name: create a file 
+      file:
+        path: /home/ubuntu/file1.txt
+        state: touch
+        mode: '0755'
+
+    - name: Compress directory /path/to/foo/ into /path/to/foo.tgz
+      archive:
+         path: /home/ubuntu/file1.txt.gz
+         dest: /home/ubuntu/file1.txt
+
+    - name: clone git repo
+      git:
+        repo: https://github.com/mmumshad/ansible-playable.git
+        dest: /home/ubuntu/ansible-playable
+        archive: /home/ubuntu/ansible-playable.zip
+

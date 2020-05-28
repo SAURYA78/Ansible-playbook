@@ -1,0 +1,20 @@
+- hosts: target1
+  become: true
+  tasks:
+#    - name: install apache
+#     apt: name=apache2 state=present update_cache=yes
+    - name: make a file 
+#      shell:
+      command: echo "hello world" > debug.txt
+
+    - name: replace index.html
+      copy:
+        src: /home/ubuntu/ansible/test.yml
+        dest: /home/ubuntu/debug2.txt
+      register: index_file
+
+      #  content: "Hi i ma host {{ ansible_hostname }} and i run linux kernel {{ ansible_kernel }}\n"
+   
+    - name: output index file
+      debug: msg={{ index_file.checksum }}
+
